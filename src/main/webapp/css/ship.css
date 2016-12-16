@@ -1,0 +1,24 @@
+ body{
+		margin-top: 0;
+	}
+	.tabletop{
+			background-color: #005FB3;
+			border-right: 0px solid white;
+			color: white;
+			text-align: center;
+
+	}
+	td{border: 1px solid #D6D6D6;height: 40px;border-bottom: 0;border-right: 0;text-align:center; }
+	.nav ul{ width:420px;margin:0px auto;height:38px;padding:0;margin-right:1px}
+	.searchTj{width:98%;margin:0 auto;}
+	.searchTj ul{list-style:none;width:100%;}
+	.searchTj ul li{float:left;width:250px;margin-bottom:5px;}
+	.searchTj ul li span{float:left;line-height:26px;font-size:14px;}
+	.textflield{float:left;margin-left:5px;height:26px;  line-height:10px;width:140px; }
+	#uppart{
+		position: fixed;
+		margin-top: 0px;
+		margin-bottom: 10px;
+		width: 100%;
+		background: #CCC;
+	}

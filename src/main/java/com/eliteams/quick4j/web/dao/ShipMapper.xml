@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eliteams.quick4j.web.dao.ShipMapper" >
+  <resultMap id="BaseResultMap" type="com.eliteams.quick4j.web.model.Ship" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="imo" property="imo" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="buildYear" property="buildyear" jdbcType="VARCHAR" />
+    <result column="builder" property="builder" jdbcType="VARCHAR" />
+    <result column="model" property="model" jdbcType="VARCHAR" />
+    <result column="ice" property="ice" jdbcType="VARCHAR" />
+    <result column="owned" property="owned" jdbcType="VARCHAR" />
+    <result column="bunkers" property="bunkers" jdbcType="VARCHAR" />
+    <result column="twopenult" property="twopenult" jdbcType="VARCHAR" />
+    <result column="threepenult" property="threepenult" jdbcType="VARCHAR" />
+    <result column="tpc" property="tpc" jdbcType="VARCHAR" />
+    <result column="callsign" property="callsign" jdbcType="VARCHAR" />
+    <result column="hp" property="hp" jdbcType="VARCHAR" />
+    <result column="fourpenult" property="fourpenult" jdbcType="VARCHAR" />
+    <result column="nt" property="nt" jdbcType="VARCHAR" />
+    <result column="onelast" property="onelast" jdbcType="VARCHAR" />
+    <result column="twolast" property="twolast" jdbcType="VARCHAR" />
+    <result column="threelast" property="threelast" jdbcType="VARCHAR" />
+    <result column="fourlast" property="fourlast" jdbcType="VARCHAR" />
+    <result column="onepenult" property="onepenult" jdbcType="VARCHAR" />
+    <result column="loa" property="loa" jdbcType="VARCHAR" />
+    <result column="beam" property="beam" jdbcType="VARCHAR" />
+    <result column="ggt" property="ggt" jdbcType="VARCHAR" />
+    <result column="dwt" property="dwt" jdbcType="VARCHAR" />
+    <result column="flag" property="flag" jdbcType="VARCHAR" />
+    <result column="classs" property="classs" jdbcType="VARCHAR" />
+    <result column="next_ss" property="nextSs" jdbcType="VARCHAR" />
+    <result column="next_dd" property="nextDd" jdbcType="VARCHAR" />
+    <result column="speed" property="speed" jdbcType="VARCHAR" />
+    <result column="draft" property="draft" jdbcType="VARCHAR" />
+    <result column="ldt" property="ldt" jdbcType="VARCHAR" />
+    <result column="mmaker" property="mmaker" jdbcType="VARCHAR" />
+    <result column="mmype" property="mmype" jdbcType="VARCHAR" />
+    <result column="mbr" property="mbr" jdbcType="VARCHAR" />
+    <result column="mcyl" property="mcyl" jdbcType="VARCHAR" />
+    <result column="amake" property="amake" jdbcType="VARCHAR" />
+    <result column="atype" property="atype" jdbcType="VARCHAR" />
+    <result column="aqty" property="aqty" jdbcType="VARCHAR" />
+    <result column="arated" property="arated" jdbcType="VARCHAR" />
+    <result column="acyl" property="acyl" jdbcType="VARCHAR" />
+    <result column="ctype" property="ctype" jdbcType="VARCHAR" />
+    <result column="cqty" property="cqty" jdbcType="VARCHAR" />
+    <result column="baux" property="baux" jdbcType="VARCHAR" />
+    <result column="blarge" property="blarge" jdbcType="VARCHAR" />
+    <result column="bgas" property="bgas" jdbcType="VARCHAR" />
+    <result column="bexhaust" property="bexhaust" jdbcType="VARCHAR" />
+    <result column="emaker" property="emaker" jdbcType="VARCHAR" />
+    <result column="etype" property="etype" jdbcType="VARCHAR" />
+    <result column="wanchor" property="wanchor" jdbcType="VARCHAR" />
+    <result column="wcapstan" property="wcapstan" jdbcType="VARCHAR" />
+    <result column="tasishaft" property="tasishaft" jdbcType="VARCHAR" />
+    <result column="anchor" property="anchor" jdbcType="VARCHAR" />
+    <result column="anchorchain" property="anchorchain" jdbcType="VARCHAR" />
+    <result column="air" property="air" jdbcType="VARCHAR" />
+    <result column="freon" property="freon" jdbcType="VARCHAR" />
+    <result column="refrige" property="refrige" jdbcType="VARCHAR" />
+    <result column="tubluar" property="tubluar" jdbcType="VARCHAR" />
+    <result column="propeller" property="propeller" jdbcType="VARCHAR" />
+    <result column="filename" property="filename" jdbcType="VARCHAR"/>
+    <result column="filedata" property="filedata" jdbcType="BLOB" typeHandler="org.apache.ibatis.type.BlobTypeHandler"/>
+    <result column="inputdate" property="inputdate" jdbcType="TIMESTAMP"/>
+    <association property="type" javaType="Type">
+      <id property="tid" column="tid"/>
+      <result property="category" column="category"/>
+    </association>
+
+  </resultMap>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select * from shipInfo s JOIN type t on t.tid=s.type_id
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <select id="listShips" resultMap="BaseResultMap">
+    select * from shipInfo s JOIN type t on t.tid=s.type_id
+
+  </select>
+  <select id="selectByPrimaryImo" resultMap="BaseResultMap" parameterType="String">
+    select * from shipInfo s JOIN type t on t.tid=s.type_id where imo=#{imo}
+
+  </select>
+  <select id="selectById" resultMap="BaseResultMap" parameterType="Integer">
+    select * from shipInfo s JOIN type t on t.tid=s.type_id where id=#{id}
+  </select>
+
+  <!--多条件查询-->
+  <select id="select" resultMap="BaseResultMap" parameterType="Ship">
+    select * from shipInfo s join type t on t.tid=s.type_id
+      <where>
+        <if test="imo!=null">
+          s.imo =#{imo}
+        </if>
+        <if test="name!=null">
+         and s.name =#{name}
+        </if>
+        <if test="type.tid!=0 and type.tid!=''">
+        and s.type_id=#{type.tid}
+        </if>
+
+      </where>
+
+  </select>
+
+
+  <!--多条件分页查询-->
+  <select id="selectByName" resultMap="BaseResultMap" parameterType="Parameter">
+    select * from shipInfo s join type t on t.tid=s.type_id
+    <where>
+      1 = 1
+      <if test="imo!=null and imo!=''">
+        and s.imo=#{imo}
+      </if>
+      <if test="name!=null and name!=''">
+        and s.name=#{name}
+      </if>
+      <if test="tid!=null and tid!=0 and tid!=''">
+        and s.type_id=#{tid}
+      </if>
+    </where>
+      ORDER BY id
+
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from shipinfo
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.eliteams.quick4j.web.model.Ship" useGeneratedKeys="true" keyProperty="id" >
+    insert into shipinfo (id, imo, status, 
+      name, buildYear, builder, 
+      model, ice, owned, 
+      bunkers, twopenult, threepenult,
+      tpc, callsign, hp, 
+      fourpenult, nt, onelast,
+      twolast, threelast, fourlast, 
+      onepenult, loa, beam, ggt,
+      dwt, flag, classs, 
+      next_ss, next_dd, speed, draft, 
+      ldt, mmaker, mmype, 
+      mbr, mcyl, amake, atype, 
+      aqty, arated, acyl, 
+      ctype, cqty, baux, 
+      blarge, bgas, bexhaust, 
+      emaker, etype, wanchor, 
+      wcapstan, tasishaft, anchor, 
+      anchorchain, air, freon, 
+      refrige, tubluar, propeller, filename,filedata,inputdate,
+      type_id)
+    values (#{id,jdbcType=INTEGER}, #{imo,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{buildyear,jdbcType=VARCHAR}, #{builder,jdbcType=VARCHAR},
+      #{model,jdbcType=VARCHAR}, #{ice,jdbcType=VARCHAR}, #{owned,jdbcType=VARCHAR}, 
+      #{bunkers,jdbcType=VARCHAR}, #{twopenult,jdbcType=VARCHAR}, #{threepenult,jdbcType=VARCHAR},
+      #{tpc,jdbcType=VARCHAR}, #{callsign,jdbcType=VARCHAR}, #{hp,jdbcType=VARCHAR}, 
+      #{fourpenult,jdbcType=VARCHAR}, #{nt,jdbcType=VARCHAR}, #{onelast,jdbcType=VARCHAR},
+      #{twolast,jdbcType=VARCHAR}, #{threelast,jdbcType=VARCHAR}, #{fourlast,jdbcType=VARCHAR}, 
+      #{onepenult,jdbcType=VARCHAR}, #{loa,jdbcType=VARCHAR}, #{beam,jdbcType=VARCHAR}, #{ggt,jdbcType=VARCHAR},
+      #{dwt,jdbcType=VARCHAR}, #{flag,jdbcType=VARCHAR}, #{classs,jdbcType=VARCHAR}, 
+      #{nextSs,jdbcType=VARCHAR}, #{nextDd,jdbcType=VARCHAR}, #{speed,jdbcType=VARCHAR}, #{draft,jdbcType=VARCHAR},
+      #{ldt,jdbcType=VARCHAR}, #{mmaker,jdbcType=VARCHAR}, #{mmype,jdbcType=VARCHAR}, 
+      #{mbr,jdbcType=VARCHAR}, #{mcyl,jdbcType=VARCHAR}, #{amake,jdbcType=VARCHAR}, #{atype,jdbcType=VARCHAR}, 
+      #{aqty,jdbcType=VARCHAR}, #{arated,jdbcType=VARCHAR}, #{acyl,jdbcType=VARCHAR}, 
+      #{ctype,jdbcType=VARCHAR}, #{cqty,jdbcType=VARCHAR}, #{baux,jdbcType=VARCHAR}, 
+      #{blarge,jdbcType=VARCHAR}, #{bgas,jdbcType=VARCHAR}, #{bexhaust,jdbcType=VARCHAR}, 
+      #{emaker,jdbcType=VARCHAR}, #{etype,jdbcType=VARCHAR}, #{wanchor,jdbcType=VARCHAR}, 
+      #{wcapstan,jdbcType=VARCHAR}, #{tasishaft,jdbcType=VARCHAR}, #{anchor,jdbcType=VARCHAR}, 
+      #{anchorchain,jdbcType=VARCHAR}, #{air,jdbcType=VARCHAR}, #{freon,jdbcType=VARCHAR}, 
+      #{refrige,jdbcType=VARCHAR}, #{tubluar,jdbcType=VARCHAR}, #{propeller,jdbcType=VARCHAR},
+      #{filename,jdbcType=VARCHAR},#{filedata,jdbcType=BLOB,typeHandler=org.apache.ibatis.type.BlobTypeHandler},
+      #{inputdate,jdbcType=TIMESTAMP},
+      #{type.tid,jdbcType=INTEGER})
+  </insert>
+
+
+  <update id="updateByPrimaryKey" parameterType="com.eliteams.quick4j.web.model.Ship" >
+    update shipinfo
+    set imo = #{imo,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      buildYear = #{buildyear,jdbcType=VARCHAR},
+      builder = #{builder,jdbcType=VARCHAR},
+      model = #{model,jdbcType=VARCHAR},
+      ice = #{ice,jdbcType=VARCHAR},
+      owned = #{owned,jdbcType=VARCHAR},
+      bunkers = #{bunkers,jdbcType=VARCHAR},
+      twopenult = #{twopenult,jdbcType=VARCHAR},
+      threepenult = #{threepenult,jdbcType=VARCHAR},
+      tpc = #{tpc,jdbcType=VARCHAR},
+      callsign = #{callsign,jdbcType=VARCHAR},
+      hp = #{hp,jdbcType=VARCHAR},
+      fourpenult = #{fourpenult,jdbcType=VARCHAR},
+      nt = #{nt,jdbcType=VARCHAR},
+      onelast = #{onelast,jdbcType=VARCHAR},
+      twolast = #{twolast,jdbcType=VARCHAR},
+      threelast = #{threelast,jdbcType=VARCHAR},
+      fourlast = #{fourlast,jdbcType=VARCHAR},
+      onepenult = #{onepenult,jdbcType=VARCHAR},
+      loa = #{loa,jdbcType=VARCHAR},
+      beam = #{beam,jdbcType=VARCHAR},
+      ggt = #{ggt,jdbcType=VARCHAR},
+      dwt = #{dwt,jdbcType=VARCHAR},
+      flag = #{flag,jdbcType=VARCHAR},
+      classs = #{classs,jdbcType=VARCHAR},
+      next_ss = #{nextSs,jdbcType=VARCHAR},
+      next_dd = #{nextDd,jdbcType=VARCHAR},
+      speed = #{speed,jdbcType=VARCHAR},
+      draft = #{draft,jdbcType=VARCHAR},
+      ldt = #{ldt,jdbcType=VARCHAR},
+      mmaker = #{mmaker,jdbcType=VARCHAR},
+      mmype = #{mmype,jdbcType=VARCHAR},
+      mbr = #{mbr,jdbcType=VARCHAR},
+      mcyl = #{mcyl,jdbcType=VARCHAR},
+      amake = #{amake,jdbcType=VARCHAR},
+      atype = #{atype,jdbcType=VARCHAR},
+      aqty = #{aqty,jdbcType=VARCHAR},
+      arated = #{arated,jdbcType=VARCHAR},
+      acyl = #{acyl,jdbcType=VARCHAR},
+      ctype = #{ctype,jdbcType=VARCHAR},
+      cqty = #{cqty,jdbcType=VARCHAR},
+      baux = #{baux,jdbcType=VARCHAR},
+      blarge = #{blarge,jdbcType=VARCHAR},
+      bgas = #{bgas,jdbcType=VARCHAR},
+      bexhaust = #{bexhaust,jdbcType=VARCHAR},
+      emaker = #{emaker,jdbcType=VARCHAR},
+      etype = #{etype,jdbcType=VARCHAR},
+      wanchor = #{wanchor,jdbcType=VARCHAR},
+      wcapstan = #{wcapstan,jdbcType=VARCHAR},
+      tasishaft = #{tasishaft,jdbcType=VARCHAR},
+      anchor = #{anchor,jdbcType=VARCHAR},
+      anchorchain = #{anchorchain,jdbcType=VARCHAR},
+      air = #{air,jdbcType=VARCHAR},
+      freon = #{freon,jdbcType=VARCHAR},
+      refrige = #{refrige,jdbcType=VARCHAR},
+      tubluar = #{tubluar,jdbcType=VARCHAR},
+      propeller = #{propeller,jdbcType=VARCHAR},
+      filename=#{filename,jdbcType=VARCHAR},
+      filedata=#{filedata,jdbcType=BLOB,typeHandler=org.apache.ibatis.type.BlobTypeHandler},
+      inputdate=#{inputdate,jdbcType=TIMESTAMP},
+      type_id = #{type.tid,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
