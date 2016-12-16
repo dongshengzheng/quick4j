@@ -22,7 +22,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 <head>
 <base href="<%=basePath%>">
 <meta charset="utf-8"/>
-<title>登录到 Quick4j</title>
+<title>登录到 SJTU2GO</title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta content="" name="description"/>
@@ -52,7 +52,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 <body class="login">
 <!-- BEGIN LOGO -->
 <div class="logo">
-	<img src="assets/img/logo-big.png" alt=""/>
+	<img src="assets/img/loading.gif" alt=""/>
 </div>
 <!-- END LOGO -->
 <!-- BEGIN LOGIN -->
@@ -95,13 +95,13 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 		</div>
 		<div class="create-account">
 			<p>
-				 还没有账号 ?&nbsp; <a href="javascript:;" id="register-btn">创建一个账号</a>
+				 还没有账号 ?&nbsp; <a href="javascript:;" id="register-btn";>创建一个账号</a>
 			</p>
 		</div>
 	</form>
 	<!-- END LOGIN FORM -->
 	<!-- BEGIN FORGOT PASSWORD FORM -->
-	<form class="forget-form" action="index.html" method="post">
+	<form class="forget-form" action="index" method="post">
 		<h3>忘记密码 ?</h3>
 		<p>
 			 请输入您的电子邮箱地址来重置您的密码.
@@ -443,7 +443,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 <!-- END LOGIN -->
 <!-- BEGIN COPYRIGHT -->
 <div class="copyright">
-	 2014 &copy; Eliteams - Quick4j
+	 2016 &copy; CTO Angel - SJTU2GO
 </div>
 <!-- END COPYRIGHT -->
 <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
@@ -462,7 +462,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 <script src="assets/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
 <!-- END CORE PLUGINS -->
 <!-- BEGIN PAGE LEVEL PLUGINS -->
-<script src="assets/plugins/jquery-validation/dist/jquery.validate.min.js" type="text/javascript"></script>
+<script src="assets/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
 <script src="assets/plugins/backstretch/jquery.backstretch.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="assets/plugins/select2/select2.min.js"></script>
 <!-- END PAGE LEVEL PLUGINS -->

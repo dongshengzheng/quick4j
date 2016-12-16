@@ -43,6 +43,12 @@
                     <skipTests>${skipTests}</skipTests>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>9.2.17.v20160517</version>
+            </plugin>
         </plugins>
 
         <!--配置Maven 对resource文件 过滤 -->
